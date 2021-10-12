@@ -7,6 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AdventurerAttributeRepository::class)
+ * @ORM\Table(
+ *   indexes={
+ *     @ORM\Index(name="attribute_idx", columns={"attribute"})
+ *   },
+ *   uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="adventurer_attribute_idx", columns={"adventurer_id","attribute"})
+ *   }
+ * )
  */
 class AdventurerAttribute
 {

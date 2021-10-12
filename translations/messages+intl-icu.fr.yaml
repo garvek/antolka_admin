@@ -7,12 +7,15 @@ Logout: Déconnexion
 Return to index: Retour à l'index
 CRUD pages: Pages BDD
 Editor pages: Pages d'éditeur
+Message pages: Pages de messages
 
 # CRUD entities
 User: Utilisateur
 ControlInfo: Contrôle
 Adventurer: Aventurier
 AdventurerAttribute: Attribut
+Message: Message
+MessageRecipient: Destinataire
 Vehicle: Véhicule
 VehiclePassenger: Passager
 Region: Région
@@ -41,6 +44,14 @@ Z: Z
 Image: Image
 Allowed Vehicles: Véhicules autorisés
 Filename: Nom de fichier
+Type: Type
+Tag: Tag
+
+# CRUD values
+Global: Global
+Area: Périmètre
+Direct: Direct
+Special: Spécial
 
 # Editor menus
 Adventurer (AI): Aventurier (IA)
@@ -180,3 +191,26 @@ Adventurer updated: Aventurier mis à jour
 "Deaths": "Morts"
 "Kills": "Victimes"
 "Distance": "Distance"
+
+# Publisher menus
+News: Annonces
+Event: Evénements
+
+# Publisher fields
+Id: ID
+Publisher: Rédacteur
+Messages: Messages
+Create Message: Créer Message
+Edit Message: Editer Message
+Author: Auteur
+Title: Titre
+Content: Contenu
+Published: Publié
+Message created: Message créé
+Message updated: Message mis à jour
+Message removed: Message retiré
+
+# Publisher values
+system: Système
+region: Région
+zone: Zone

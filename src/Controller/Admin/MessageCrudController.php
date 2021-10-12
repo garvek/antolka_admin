@@ -6,6 +6,7 @@ use App\Entity\Message;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -24,7 +25,8 @@ class MessageCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
             TextField::new('content'),
-            IntegerField::new('type'),
+            ChoiceField::new('type')->setChoices($this->getMessageTypes()),
+            IntegerField::new('tag'),
             DateTimeField::new('published'),
             TextField::new('author'),
         ];
@@ -45,5 +47,17 @@ class MessageCrudController extends AbstractCrudController
                     ->add('published')
                     ->add('author')
             ;
+    }
+
+    private function getMessageTypes(): array
+    {
+        return [
+            'Global' => Message::TYPE_GLOBAL,
+            'Region' => Message::TYPE_REGION,
+            'Zone' => Message::TYPE_ZONE,
+            'Area' => Message::TYPE_AREA,
+            'Direct' => Message::TYPE_DIRECT,
+            'Special' => Message::TYPE_SPECIAL
+        ];
     }
 }

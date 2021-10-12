@@ -1,0 +1,94 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'Publisher'|trans ~ ' - ' ~ 'Messages'|trans }}{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-secondary" href="{{ ea_url().setRoute('message_event_index') }}">
+        {{ 'Return to index'|trans }}
+    </a>
+{% endblock %}
+{% block main %}
+    {% if message is not null %}
+        <h1>{{ 'Edit Message'|trans ~ ' #' ~ message.id }}</h1>
+    {% else %}
+        <h1>{{ 'Create Message'|trans }}</h1>
+    {% endif %}    
+
+    <div class="container mt-2">
+        {{ errors }}
+    </div>
+    
+    <div class="container">
+        {{ form_start(form) }}
+        <fieldset>
+            <div class="col-sm-6 col-12">{{ form_row(form.publisher) }}</div>
+        </fieldset>
+        <fieldset>
+            <div class="col-sm-6 col-12">{{ form_row(form.title) }}</div>
+        </fieldset>
+        <fieldset>
+            <div class="col-12">{{ form_row(form.content) }}</div>
+        </fieldset>
+        <fieldset>
+        <ul type="none" class="recipients clearfix" 
+            data-index="{{ form.recipients|length > 0 ? form.recipients|last.vars.name + 1 : 0 }}" 
+            data-prototype="{{ form_widget(form.recipients.vars.prototype)|e('html_attr') }}"
+        >
+        {% for recipient in form.recipients %}
+            <li class="col-lg-3 col-md-4 col-sm-6 col-12 float-start shadow">{{ form_row(recipient) }}</li>
+        {% endfor %}
+        </ul>
+        <button type="button" class="btn btn-info add_item_link" data-collection-holder-class="recipients">
+            {{ 'Add recipient'|trans }}
+        </button>
+        </fieldset>
+        {{ form_end(form) }}
+    </div>
+
+    <script type="text/javascript">
+    //<![CDATA[
+    const addFormToCollection = (e) => {
+        const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+        
+        const item = document.createElement('fieldset');
+        item.classList.add('mb-3');
+        item.innerHTML = collectionHolder
+            .dataset
+            .prototype
+            .replace(
+            /__name__/g,
+            collectionHolder.dataset.index
+        );
+        
+        const li = document.createElement('li');
+        li.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'col-12', 'float-start', 'shadow');
+        li.appendChild(item);
+        
+        collectionHolder.appendChild(li);
+        collectionHolder.dataset.index++;
+        
+        addRecipFormDeleteLink(item);
+    };
+
+    const addRecipFormDeleteLink = (recipFormLi) => {
+        const removeFormButton = document.createElement('button')
+        removeFormButton.classList.add('btn', 'btn-danger');
+        removeFormButton.innerText = '{{ 'Delete recipient'|trans }}';
+        
+        recipFormLi.append(removeFormButton);
+
+        removeFormButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            recipFormLi.remove();
+        });
+    }
+
+    document
+        .querySelectorAll('.add_item_link')
+        .forEach(btn => btn.addEventListener("click", addFormToCollection));
+
+    document
+        .querySelectorAll('ul.recipients li div')
+        .forEach(recipient => addRecipFormDeleteLink(recipient));
+    //]]>
+    </script>
+{% endblock %}

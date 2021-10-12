@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TileImageRepository::class)
+ * @ORM\Table(indexes={
+ *     @ORM\Index(name="category_idx", columns={"category"})
+ * })
  */
 class TileImage
 {

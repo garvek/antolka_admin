@@ -1,0 +1,23 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'Publisher'|trans ~ ' - ' ~ 'Messages'|trans }}{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-secondary" href="{{ ea_url().setRoute('message_news_index') }}">
+        {{ 'Return to index'|trans }}
+    </a>
+{% endblock %}
+{% block main %}
+    {% if message is not null %}
+        <h1>{{ 'Edit Message'|trans ~ ' #' ~ message.id }}</h1>
+    {% else %}
+        <h1>{{ 'Create Message'|trans }}</h1>
+    {% endif %}
+
+    <div class="container mt-2">
+        {{ errors }}
+    </div>
+    
+    <div class="container">
+        {{ form(form) }}
+    </div>
+{% endblock %}

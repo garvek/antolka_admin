@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TileRepository::class)
- * @ORM\Table(indexes={
- *     @ORM\Index(name="coord_idx", columns={"x","y","z"})
+ * @ORM\Table(uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="coord_idx", columns={"x","y","z"})
  * })
  */
 class Tile

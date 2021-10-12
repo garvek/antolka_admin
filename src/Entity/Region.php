@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=RegionRepository::class)
  * @ORM\Table(indexes={
- *     @ORM\Index(name="name_idx", columns={"name"})
+ *     @ORM\Index(name="name_idx", columns={"name"}),
+ *     @ORM\Index(name="climate_idx", columns={"climate"})
  * })
  */
 class Region

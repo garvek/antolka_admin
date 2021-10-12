@@ -49,7 +49,7 @@ class TileRepository extends ServiceEntityRepository
     }
     */
     
-    public function findByIdWithZoneAndRegion(int $id): ?Tile
+    public function findOneByIdWithZoneAndRegion(int $id): ?Tile
     {
         return $this->createQueryBuilder('t')
                 ->addSelect('z')

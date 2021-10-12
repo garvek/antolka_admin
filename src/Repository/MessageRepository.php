@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Adventurer;
 use App\Entity\Message;
+use App\Entity\Region;
+use App\Entity\Zone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +50,54 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOneByIdWithRecipients(int $id): ?Message
+    {
+        return $this->createQueryBuilder('m')
+            ->addSelect('r')
+            ->addSelect('rs')
+            ->leftJoin('m.recipients', 'rs')
+            ->leftJoin('rs.recipient', 'r')
+            ->andWhere('m.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findByZoneOrRegion(Zone $zone, Region $region)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('(m.type = :zType) AND (m.tag = :zId)')
+            ->orWhere('(m.type = :rType) AND (m.tag = :rId)')
+            ->setParameter('zType', Message::TYPE_ZONE)
+            ->setParameter('zId', $zone->getId())
+            ->setParameter('rType', Message::TYPE_REGION)
+            ->setParameter('rId', $region->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByRecipient(Adventurer $recipient): array
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.recipients', 'rs')
+            ->leftJoin('rs.recipient', 'r')
+            ->andWhere('r = :r')
+            ->setParameter('r', $recipient)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByRecipientAfter(Adventurer $recipient, \DateTimeInterface $after): array
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.recipients', 'rs')
+            ->leftJoin('rs.recipient', 'r')
+            ->andWhere('r = :r')
+            ->setParameter('r', $recipient)
+            ->andWhere('m.published > :after')
+            ->setParameter('after', $after)
+            ->getQuery()
+            ->getResult();
+    }
 }

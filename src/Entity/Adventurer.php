@@ -9,10 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AdventurerRepository::class)
- * @ORM\Table(indexes={
- *     @ORM\Index(name="name_idx", columns={"name"}),
+ * @ORM\Table(
+ *   indexes={
  *     @ORM\Index(name="ctl_type_idx", columns={"control_type"})
- * })
+ *   },
+ *   uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="name_idx", columns={"name"})
+ *   }
+ * )
  */
 class Adventurer
 {

@@ -7,6 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=VehiclePassengerRepository::class)
+ * @ORM\Table(
+ *   indexes={
+ *     @ORM\Index(name="seat_idx", columns={"seat"})
+ *   },
+ *   uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="vehicle_seat_idx", columns={"vehicle_id","seat"})
+ *   }
+ * )
  */
 class VehiclePassenger
 {

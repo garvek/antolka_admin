@@ -10,7 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ZoneRepository::class)
  * @ORM\Table(indexes={
- *     @ORM\Index(name="name_idx", columns={"name"})
+ *     @ORM\Index(name="name_idx", columns={"name"}),
+ *     @ORM\Index(name="crime_allowed_idx", columns={"crime_allowed"}),
+ *     @ORM\Index(name="combat_allowed_idx", columns={"combat_allowed"}),
+ *     @ORM\Index(name="search_allowed_idx", columns={"search_allowed"}),
+ *     @ORM\Index(name="crop_allowed_idx", columns={"crop_allowed"}),
+ *     @ORM\Index(name="shout_allowed_idx", columns={"shout_allowed"}),
+ *     @ORM\Index(name="radio_allowed_idx", columns={"radio_allowed"})
  * })
  */
 class Zone

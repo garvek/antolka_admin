@@ -1,0 +1,40 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'Publisher'|trans ~ ' - ' ~ 'Messages'|trans }}{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-primary" href="{{ ea_url().setRoute('message_event_create') }}">
+        {{ 'Create'|trans }}
+    </a> 
+{% endblock %}
+{% block main %}
+    <table class="datagrid">
+        <thead>
+            <tr>
+                <td>{{ 'Id'|trans() }}</td>
+                <td>{{ 'Title'|trans() }}</td>
+                <td>{{ 'Author'|trans() }}</td>
+                <td>{{ 'Published'|trans() }}</td>
+                <td>{{ 'Actions'|trans() }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in messages %}
+                <tr>
+                    <td>{{ entry.id }}</td>
+                    <td>{{ entry.title }}</td>
+                    <td>{{ entry.author }}</td>
+                    <td>{{ entry.published|format_date() }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ ea_url().setRoute('message_event_edit', { id: entry.id }) }}">
+                            {{ 'Edit'|trans }}
+                        </a>
+                        <a class="btn btn-danger" href="{{ ea_url().setRoute('message_event_remove', { msg: entry.id }) }}" 
+                          onclick="return confirm('{{ "Are you sure ?"|trans() }}')">
+                            {{ 'Remove'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

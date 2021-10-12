@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
+ * @ORM\Table(
+ *   indexes={
+ *     @ORM\Index(name="type_idx", columns={"type"}),
+ *     @ORM\Index(name="type_tag_idx", columns={"type","tag"}),
+ *     @ORM\Index(name="published_idx", columns={"published"})
+ * })
  */
 class Message
 {
@@ -46,6 +52,11 @@ class Message
      * @ORM\Column(type="integer")
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $tag;
 
     /**
      * @ORM\Column(type="string", length=200)
@@ -114,6 +125,18 @@ class Message
     public function setType(int $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTag(): ?int
+    {
+        return $this->tag;
+    }
+
+    public function setTag(int $tag): self
+    {
+        $this->tag = $tag;
 
         return $this;
     }

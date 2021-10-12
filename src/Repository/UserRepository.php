@@ -65,7 +65,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
     
-    public function findByIdWihControlInfo($id): ?User
+    public function findByIdWithControlInfo($id): ?User
     {
         return $this->createQueryBuilder('u')
             ->addSelect('c')

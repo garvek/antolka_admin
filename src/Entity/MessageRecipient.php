@@ -7,6 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRecipientRepository::class)
+ * @ORM\Table(
+ *   indexes={
+ *     @ORM\Index(name="opened_idx", columns={"opened"})
+ * })
  */
 class MessageRecipient
 {
