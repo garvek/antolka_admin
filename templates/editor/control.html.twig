@@ -1,0 +1,35 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'Editor'|trans ~ ' - ' ~ 'Control'|trans }}{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-primary" href="{{ ea_url().setRoute('editor_control_create') }}">
+        {{ 'Create'|trans }}
+    </a>
+{% endblock %}
+{% block main %}
+    {% if list|length > 0 %}
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>{{ 'User'|trans }}</th>
+                <th>{{ 'Adventurer'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for control in list %}
+                <tr>
+                    <td>{{ control.user.username }}</td>
+                    <td>{{ control.adventurer.name }}</td>
+                    <td>
+                        <a class="btn btn-danger" href="{{ ea_url().setRoute('editor_control_remove', { id: control.id }) }}" 
+                           onclick="return confirm('{{ "Are you sure ?"|trans() }}')">
+                            {{ 'Remove'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

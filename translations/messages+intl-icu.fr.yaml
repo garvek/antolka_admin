@@ -1,0 +1,182 @@
+# Menus
+Dashboard: Tableau de bord
+Log in: Connexion
+Your username: Nom d'utilisateur
+Your password: Mot de passe
+Logout: Déconnexion
+Return to index: Retour à l'index
+CRUD pages: Pages BDD
+Editor pages: Pages d'éditeur
+
+# CRUD entities
+User: Utilisateur
+ControlInfo: Contrôle
+Adventurer: Aventurier
+AdventurerAttribute: Attribut
+Vehicle: Véhicule
+VehiclePassenger: Passager
+Region: Région
+Zone: Zone
+Tile: Tuile
+TileImage: Image
+
+# CRUD fields
+ID: ID
+Username: Nom d'utilisateur
+Roles: Roles
+Last Date: Dernière date
+Last Ip: Dernière IP
+Is Verified: Vérifié
+Name: Nom
+Control Type: Type de contrôle
+Attribute: Attribut
+Value: Valeur
+Category: Catégorie
+Is Driving: Conduite
+Seat: Siège
+Climate: Climat
+X: X
+Y: Y
+Z: Z
+Image: Image
+Allowed Vehicles: Véhicules autorisés
+Filename: Nom de fichier
+
+# Editor menus
+Adventurer (AI): Aventurier (IA)
+Adventurer (GM): Aventurier (PNJ)
+Control: Contrôle
+
+# Editor fields
+Editor: Editeur
+Create: Créer
+Edit: Editer
+Remove: Retirer
+Are you sure ?: Etes vous sûr ?
+Attributes: Attributs
+Actions: Actions
+View Details: Détails
+Create Adventurer: Créer l'aventurier
+Edit Adventurer: Editer l'aventurier
+Add attribute: Ajouter attribut
+Delete attribute: Suppr. attribut
+Adventurer created: Aventurier créé
+Adventurer updated: Aventurier mis à jour
+
+# Editor values (with prefix)
+"[-] Health": "1 Santé"
+"[-] Fatigue": "2 Fatigue"
+"[-] Moves": "3 Mouvements"
+"[-] Gold": "4 Argent"
+"[T] Strength": "101 Force"
+"[T] Agility": "102 Agilité"
+"[T] Endurance": "103 Endurance"
+"[T] Luck": "104 Chance"
+"[A] Darts": "201 Fléchettes"
+"[A] Arrows": "202 Flèches"
+"[A] Bolts": "203 Carreaux"
+"[A] Bullets": "204 Balles"
+"[A] Cartridges": "205 Cartouches"
+"[A] Loaders": "206 Chargeurs"
+"[A] Explosives": "207 Explosifs"
+"[A] Nuclear ogives": "299 Ogives nucléaires"
+"[W] Blowgun": "301 Sarbacane"
+"[W] Bow": "302 Arc"
+"[W] Crossbow": "303 Arbalète"
+"[W] Gun": "304 Pistolet"
+"[W] Shotgun": "305 Fusil"
+"[W] Machinegun": "306 Mitrailleuse"
+"[W] Launcher": "307 Lance roquettes"
+"[W] Mini nuke": "399 Bombe nucléaire tactique"
+"[P] Stones": "401 Pierres"
+"[P] Smoke bombs": "402 Fumigènes"
+"[P] Flash bangs": "403 Flash bangs"
+"[P] Grenades": "404 Grenades"
+"[P] Molotov": "405 Cocktails Molotov"
+"[U] Bandages": "501 Bandages"
+"[U] Medikits": "502 Kits de soins"
+"[U] Pain killers": "503 Antidouleurs"
+"[U] Steroids": "504 Stéroides"
+"[U] Antirads": "505 Antirads"
+"[D] Reinforced jacket": "601 Vestes renforcées"
+"[D] Bullet-proof vest": "602 Gilets pare-balles"
+"[D] Helmet": "603 Casque"
+"[C] Wood": "901 Bois"
+"[C] Cloth": "902 Tissu"
+"[C] Leather": "903 Cuir"
+"[C] Glue": "904 Colle"
+"[C] Tape": "905 Scotch"
+"[C] Iron": "911 Fer"
+"[C] Copper": "912 Cuivre"
+"[C] Steel": "913 Acier"
+"[C] Aluminium": "914 Aluminium"
+"[C] Discrete parts": "921 Composants électroniques"
+"[C] Circuit boards": "922 Circuits imprimés"
+"[C] Chips": "923 Puces électroniques"
+"[C] Switches": "924 Commutateurs"
+"[C] Powder": "931 Poudre"
+"[C] Acid": "932 Acide"
+"[C] Detergent": "933 Détergent"
+"[C] Fertilizer": "934 Engrais"
+"[S] Deaths": "1001 Morts"
+"[S] Kills": "1002 Victimes"
+"[S] Distance": "1003 Distance"
+
+# Editor values (without prefix)
+"Health": "Santé"
+"Fatigue": "Fatigue"
+"Moves": "Mouvements"
+"Gold": "Argent"
+"Strength": "Force"
+"Agility": "Agilité"
+"Endurance": "Endurance"
+"Luck": "Chance"
+"Darts": "Fléchettes"
+"Arrows": "Flèches"
+"Bolts": "Carreaux"
+"Bullets": "Balles"
+"Cartridges": "Cartouches"
+"Loaders": "Chargeurs"
+"Explosives": "Explosifs"
+"Nuclear ogives": "Ogives nucléaires"
+"Blowgun": "Sarbacane"
+"Bow": "Arc"
+"Crossbow": "Arbalète"
+"Gun": "Pistolet"
+"Shotgun": "Fusil"
+"Machinegun": "Mitrailleuse"
+"Launcher": "Lance roquettes"
+"Mini nuke": "Bombe nucléaire tactique"
+"Stones": "Pierres"
+"Smoke bombs": "Fumigènes"
+"Flash bangs": "Flash bangs"
+"Grenades": "Grenades"
+"Molotov": "Cocktails Molotov"
+"Bandages": "Bandages"
+"Medikits": "Kits de soins"
+"Pain killers": "Antidouleurs"
+"Steroids": "Stéroides"
+"Antirads": "Antirads"
+"Reinforced jacket": "Vestes renforcées"
+"Bullet-proof vest": "Gilets pare-balles"
+"Helmet": "Casque"
+"Wood": "Bois"
+"Cloth": "Tissu"
+"Leather": "Cuir"
+"Glue": "Colle"
+"Tape": "Scotch"
+"Iron": "Fer"
+"Copper": "Cuivre"
+"Steel": "Acier"
+"Aluminium": "Aluminium"
+"Discrete parts": "Composants électroniques"
+"Circuit boards": "Circuits imprimés"
+"Chips": "Puces électroniques"
+"Switches": "Commutateurs"
+"Powder": "Poudre"
+"Acid": "Acide"
+"Detergent": "Détergent"
+"Fertilizer": "Engrais"
+"Deaths": "Morts"
+"Kills": "Victimes"
+"Distance": "Distance"

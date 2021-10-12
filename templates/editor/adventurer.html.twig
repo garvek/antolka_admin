@@ -1,0 +1,43 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'Editor'|trans ~ ' - ' ~ 'Adventurer'|trans }}{% endblock %}
+{% block page_actions %}
+    {% if can_create %}
+    <a class="btn btn-primary" href="{{ ea_url().setRoute('editor_adventurer_create') }}">
+        {{ 'Create'|trans }}
+    </a>
+    {% endif %}
+{% endblock %}
+{% block main %}
+    {% if list_adv|length > 0 %}
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>{{ 'Name'|trans }}</th>
+                <th>{{ 'Tile'|trans }}</th>
+                <th>{{ 'Attributes'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adventurer in list_adv %}
+                <tr>
+                    <td>{{ adventurer.name }}</td>
+                    <td>{{ adventurer.tile.x ~ '/' ~ adventurer.tile.y ~ '/' ~ adventurer.tile.z }}</td>
+                    <td>
+                        {% for adventurer_attribute in adventurer.attributes %}
+                            {{ attribute_types[adventurer_attribute.attribute][4:]|trans ~ ' = ' ~ adventurer_attribute.value }}
+                            {% if not loop.last %};{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ ea_url().setRoute('editor_adventurer_edit', { id: adventurer.id }) }}">
+                            {{ 'View Details'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}
