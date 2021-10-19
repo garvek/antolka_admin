@@ -1,0 +1,40 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'Mapper'|trans ~ ' - ' ~ 'Region'|trans }}{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-primary" href="{{ ea_url().setRoute('cartographer_region_create') }}">
+        {{ 'Create'|trans }}
+    </a>
+{% endblock %}
+{% block main %}
+    {% if regions|length > 0 %}
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>{{ 'Name'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for region in regions %}
+                <tr>
+                    <td>
+                        <a href="{{ ea_url().setRoute('cartographer_zone_regionindex', { id: region.id }) }}">
+                            {{ region.name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ ea_url().setRoute('cartographer_region_edit', { id: region.id }) }}">
+                            {{ 'Edit'|trans() }}
+                        </a>
+                        <a class="btn btn-danger" href="{{ ea_url().setRoute('cartographer_region_remove', { id: region.id }) }}" 
+                           onclick="return confirm('{{ "Are you sure ?"|trans() }}')">
+                            {{ 'Remove'|trans }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

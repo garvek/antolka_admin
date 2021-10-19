@@ -50,6 +50,7 @@ class MainDashboardController extends AbstractDashboardController
         }
         if ($this->authorization->isGranted(User::ROLE_SUPERVISOR)) {
             yield MenuItem::linkToUrl('Editor pages', 'fas fa-list', $this->generateUrl('editor_index'));
+            yield MenuItem::linkToUrl('Mapper pages', 'fas fa-list', $this->generateUrl('cartographer_index'));
         }
         if ($this->authorization->isGranted(User::ROLE_ADMIN)) {
             yield MenuItem::linkToUrl('CRUD pages', 'fas fa-list', $this->generateUrl('crud_index'));
