@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Crud;
 
-use App\Entity\Zone;
+use App\Entity\Region;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ZoneCrudController extends AbstractCrudController
+class RegionCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Zone::class;
+        return Region::class;
     }
 
     public function configureFields(string $pageName): iterable
@@ -25,13 +24,7 @@ class ZoneCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            AssociationField::new('region'),
-            BooleanField::new('crimeAllowed')->hideOnIndex(),
-            BooleanField::new('combatAllowed')->hideOnIndex(),
-            BooleanField::new('searchAllowed')->hideOnIndex(),
-            BooleanField::new('cropAllowed')->hideOnIndex(),
-            BooleanField::new('shoutAllowed')->hideOnIndex(),
-            BooleanField::new('radioAllowed')->hideOnIndex(),
+            IntegerField::new('climate'),
         ];
     }
 	
@@ -53,7 +46,7 @@ class ZoneCrudController extends AbstractCrudController
     {
             return $filters
                     ->add('name')
-                    ->add('region')
+                    ->add('climate')
             ;
     }
 }

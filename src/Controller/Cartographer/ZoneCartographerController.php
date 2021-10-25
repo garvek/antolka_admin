@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Mapper;
+namespace App\Controller\Cartographer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;

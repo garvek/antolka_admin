@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Supervisor;
+namespace App\Controller\Editor;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

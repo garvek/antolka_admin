@@ -1,31 +1,29 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Crud;
 
-use App\Entity\ControlInfo;
+use App\Entity\VehiclePassenger;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
-class ControlInfoCrudController extends AbstractCrudController
+class VehiclePassengerCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return ControlInfo::class;
+        return VehiclePassenger::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            AssociationField::new('user'),
+            AssociationField::new('vehicle'),
             AssociationField::new('adventurer'),
-            TextField::new('lastIp'),
-            DateTimeField::new('lastDate'),
+            IntegerField::new('seat'),
         ];
     }
 	
@@ -39,10 +37,9 @@ class ControlInfoCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
             return $filters
-                ->add('user')
+                ->add('vehicle')
                 ->add('adventurer')
-                ->add('lastIp')
-                ->add('lastDate')
+                ->add('seat')
             ;
     }
 }

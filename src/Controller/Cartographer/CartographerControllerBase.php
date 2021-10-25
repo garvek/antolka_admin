@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Mapper;
+namespace App\Controller\Cartographer;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

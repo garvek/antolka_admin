@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Supervisor;
+namespace App\Controller\Editor;
 
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;

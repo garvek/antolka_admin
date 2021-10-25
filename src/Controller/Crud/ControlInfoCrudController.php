@@ -1,45 +1,48 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Crud;
 
-use App\Entity\Adventurer;
+use App\Entity\ControlInfo;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class AdventurerCrudController extends AbstractCrudController
+class ControlInfoCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Adventurer::class;
+        return ControlInfo::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('name'),
-            IntegerField::new('controlType'),
-            AssociationField::new('tile'),
+            AssociationField::new('user'),
+            AssociationField::new('adventurer'),
+            TextField::new('lastIp'),
+            DateTimeField::new('lastDate'),
         ];
     }
 	
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud
-            ->renderContentMaximized()
-        ;
+            return $crud
+                ->renderContentMaximized()
+            ;
     }
 
     public function configureFilters(Filters $filters): Filters
     {
-        return $filters
-                ->add('name')
-                ->add('controlType')
-        ;
+            return $filters
+                ->add('user')
+                ->add('adventurer')
+                ->add('lastIp')
+                ->add('lastDate')
+            ;
     }
 }

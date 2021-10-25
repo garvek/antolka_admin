@@ -9,37 +9,39 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\Message;
-use App\Form\Message\NotificationCreationData;
-use App\Form\Message\NotificationCreationForm;
+use App\Form\Message\InfoRegionCreationData;
+use App\Form\Message\InfoRegionCreationForm;
+use App\Repository\RegionRepository;
 
 /**
- * @Route("/publi/message/news")
+ * @Route("/publi/message/info-region")
  */
-class NewsMessageController extends MessageControllerBase
+class InfoRegionPublisherController extends PublisherControllerBase
 {
     private function redirectToIndex(): Response
     {
         /** @var AdminUrlGenerator */
         $routeBuilder = $this->get(AdminUrlGenerator::class);
-        return $this->redirect($routeBuilder->setController(NewsMessageController::class)->generateUrl());
+        return $this->redirect($routeBuilder->setController(InfoRegionMessageController::class)->generateUrl());
     }
 
     /**
-     * @Route("/index", name="message_news_index")
+     * @Route("/index", name="message_inforegion_index")
      */
     public function index(): Response
     {
-        return $this->render('message/news.html.twig', [
-            'messages' => $this->mRepo->findBy(array('type' => Message::TYPE_GLOBAL))
+        return $this->render('message/info-region.html.twig', [
+            'messages' => $this->mRepo->findBy(array('type' => Message::TYPE_REGION))
         ]);
     }
 
-    private function createFromForm(NotificationCreationData $data, EntityManagerInterface $em, TranslatorInterface $trans): Message
+    private function createFromForm(InfoRegionCreationData $data, EntityManagerInterface $em, TranslatorInterface $trans): Message
     {
         $message = new Message();
 
-        $message->setAuthor($trans->trans('system'));
-        $message->setType(Message::TYPE_GLOBAL);
+        $message->setAuthor($trans->trans('region') . ' ' . $data->getRegion()->getName());
+        $message->setType(Message::TYPE_REGION);
+        $message->setTag($data->getRegion()->getId());
         $message->setTitle($data->getTitle());
         $message->setContent($data->getContent());
         $message->setPublished(new \DateTime());
@@ -48,26 +50,27 @@ class NewsMessageController extends MessageControllerBase
         return $message;
     }
 
-    private function updateFromEntity(NotificationCreationData $data, Message $message): void
+    private function updateFromEntity(InfoRegionCreationData $data, Message $message): void
     {
         $data->setTitle($message->getTitle());
         $data->setContent($message->getContent());
     }
 
-    private function updateFromForm(Message $message, NotificationCreationData $data /*, EntityManagerInterface $em */): void
+    private function updateFromForm(Message $message, InfoRegionCreationData $data /*, EntityManagerInterface $em */): void
     {
         $message->setTitle($data->getTitle());
         $message->setContent($data->getContent());
     }
 
     /**
-     * @Route("/create", name="message_news_create")
+     * @Route("/create", name="message_inforegion_create")
      */
-    public function create(Request $request, TranslatorInterface $trans)
+    public function create(RegionRepository $repo, Request $request, TranslatorInterface $trans)
     {
-        $data = new NotificationCreationData();
-        $form = $this->createForm(NotificationCreationForm::class, $data, array(
-            'edit_mode' => false)
+        $data = new InfoRegionCreationData();
+        $form = $this->createForm(InfoRegionCreationForm::class, $data, array(
+            'edit_mode' => false,
+            'regions' => $repo->findAll())
         );
         
         $form->handleRequest($request);
@@ -85,7 +88,7 @@ class NewsMessageController extends MessageControllerBase
             }
         }
         
-        return $this->renderForm('message/news_edit.html.twig', [
+        return $this->renderForm('message/info-region_edit.html.twig', [
             'message' => null,
             'form' => $form,
             'errors' => $form->getErrors(),
@@ -93,19 +96,20 @@ class NewsMessageController extends MessageControllerBase
     }
 
     /**
-     * @Route("/edit/{id}", name="message_news_edit")
+     * @Route("/edit/{id}", name="message_inforegion_edit")
      */
-    public function edit(int $id, Request $request)
+    public function edit(RegionRepository $repo, int $id, Request $request)
     {
         $message = $this->mRepo->find($id);
         if (!$message) {
             return $this->redirectToIndex();
         }
         
-        $data = new NotificationCreationData();
+        $data = new InfoRegionCreationData();
         $this->updateFromEntity($data, $message);
-        $form = $this->createForm(NotificationCreationForm::class, $data, array(
-            'edit_mode' => true)
+        $form = $this->createForm(InfoRegionCreationForm::class, $data, array(
+            'edit_mode' => true,
+            'regions' => $repo->findAll())
         );
         
         $form->handleRequest($request);
@@ -122,7 +126,7 @@ class NewsMessageController extends MessageControllerBase
             }
         }
         
-        return $this->renderForm('message/news_edit.html.twig', [
+        return $this->renderForm('message/info-region_edit.html.twig', [
             'message' => $message,
             'form' => $form,
             'errors' => $form->getErrors(),
@@ -130,7 +134,7 @@ class NewsMessageController extends MessageControllerBase
     }
 
     /**
-     * @Route("/remove/{msg}", name="message_news_remove")
+     * @Route("/remove/{msg}", name="message_inforegion_remove")
      */
     public function remove(Message $msg)
     {

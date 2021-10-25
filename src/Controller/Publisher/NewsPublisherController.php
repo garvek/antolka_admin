@@ -9,39 +9,37 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\Message;
-use App\Form\Message\InfoZoneCreationData;
-use App\Form\Message\InfoZoneCreationForm;
-use App\Repository\ZoneRepository;
+use App\Form\Message\NotificationCreationData;
+use App\Form\Message\NotificationCreationForm;
 
 /**
- * @Route("/publi/message/info-zone")
+ * @Route("/publi/message/news")
  */
-class InfoZoneMessageController extends MessageControllerBase
+class NewsPublisherController extends PublisherControllerBase
 {
     private function redirectToIndex(): Response
     {
         /** @var AdminUrlGenerator */
         $routeBuilder = $this->get(AdminUrlGenerator::class);
-        return $this->redirect($routeBuilder->setController(InfoZoneMessageController::class)->generateUrl());
+        return $this->redirect($routeBuilder->setController(NewsMessageController::class)->generateUrl());
     }
 
     /**
-     * @Route("/index", name="message_infozone_index")
+     * @Route("/index", name="message_news_index")
      */
     public function index(): Response
     {
-        return $this->render('message/info-zone.html.twig', [
-            'messages' => $this->mRepo->findBy(array('type' => Message::TYPE_ZONE))
+        return $this->render('message/news.html.twig', [
+            'messages' => $this->mRepo->findBy(array('type' => Message::TYPE_GLOBAL))
         ]);
     }
 
-    private function createFromForm(InfoZoneCreationData $data, EntityManagerInterface $em, TranslatorInterface $trans): Message
+    private function createFromForm(NotificationCreationData $data, EntityManagerInterface $em, TranslatorInterface $trans): Message
     {
         $message = new Message();
 
-        $message->setAuthor($trans->trans('zone') . ' ' . $data->getZone()->getName());
-        $message->setType(Message::TYPE_ZONE);
-        $message->setTag($data->getZone()->getId());
+        $message->setAuthor($trans->trans('system'));
+        $message->setType(Message::TYPE_GLOBAL);
         $message->setTitle($data->getTitle());
         $message->setContent($data->getContent());
         $message->setPublished(new \DateTime());
@@ -50,27 +48,26 @@ class InfoZoneMessageController extends MessageControllerBase
         return $message;
     }
 
-    private function updateFromEntity(InfoZoneCreationData $data, Message $message): void
+    private function updateFromEntity(NotificationCreationData $data, Message $message): void
     {
         $data->setTitle($message->getTitle());
         $data->setContent($message->getContent());
     }
 
-    private function updateFromForm(Message $message, InfoZoneCreationData $data /*, EntityManagerInterface $em */): void
+    private function updateFromForm(Message $message, NotificationCreationData $data /*, EntityManagerInterface $em */): void
     {
         $message->setTitle($data->getTitle());
         $message->setContent($data->getContent());
     }
 
     /**
-     * @Route("/create", name="message_infozone_create")
+     * @Route("/create", name="message_news_create")
      */
-    public function create(ZoneRepository $repo, Request $request, TranslatorInterface $trans)
+    public function create(Request $request, TranslatorInterface $trans)
     {
-        $data = new InfoZoneCreationData();
-        $form = $this->createForm(InfoZoneCreationForm::class, $data, array(
-            'edit_mode' => false,
-            'zones' => $repo->findAll())
+        $data = new NotificationCreationData();
+        $form = $this->createForm(NotificationCreationForm::class, $data, array(
+            'edit_mode' => false)
         );
         
         $form->handleRequest($request);
@@ -88,7 +85,7 @@ class InfoZoneMessageController extends MessageControllerBase
             }
         }
         
-        return $this->renderForm('message/info-zone_edit.html.twig', [
+        return $this->renderForm('message/news_edit.html.twig', [
             'message' => null,
             'form' => $form,
             'errors' => $form->getErrors(),
@@ -96,20 +93,19 @@ class InfoZoneMessageController extends MessageControllerBase
     }
 
     /**
-     * @Route("/edit/{id}", name="message_infozone_edit")
+     * @Route("/edit/{id}", name="message_news_edit")
      */
-    public function edit(ZoneRepository $repo, int $id, Request $request)
+    public function edit(int $id, Request $request)
     {
         $message = $this->mRepo->find($id);
         if (!$message) {
             return $this->redirectToIndex();
         }
         
-        $data = new InfoZoneCreationData();
+        $data = new NotificationCreationData();
         $this->updateFromEntity($data, $message);
-        $form = $this->createForm(InfoZoneCreationForm::class, $data, array(
-            'edit_mode' => true,
-            'zones' => $repo->findAll())
+        $form = $this->createForm(NotificationCreationForm::class, $data, array(
+            'edit_mode' => true)
         );
         
         $form->handleRequest($request);
@@ -126,7 +122,7 @@ class InfoZoneMessageController extends MessageControllerBase
             }
         }
         
-        return $this->renderForm('message/info-zone_edit.html.twig', [
+        return $this->renderForm('message/news_edit.html.twig', [
             'message' => $message,
             'form' => $form,
             'errors' => $form->getErrors(),
@@ -134,7 +130,7 @@ class InfoZoneMessageController extends MessageControllerBase
     }
 
     /**
-     * @Route("/remove/{msg}", name="message_infozone_remove")
+     * @Route("/remove/{msg}", name="message_news_remove")
      */
     public function remove(Message $msg)
     {

@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use App\Repository\MessageRepository;
 use App\Repository\MessageRecipientRepository;
 
-abstract class MessageControllerBase extends AbstractDashboardController
+abstract class PublisherControllerBase extends AbstractDashboardController
 {
     protected $mRepo;
     protected $rRepo;

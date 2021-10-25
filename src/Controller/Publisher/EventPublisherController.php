@@ -17,7 +17,7 @@ use App\Repository\AdventurerRepository;
 /**
  * @Route("/publi/message/event")
  */
-class EventMessageController extends MessageControllerBase
+class EventPublisherController extends PublisherControllerBase
 {
     private function redirectToIndex(): Response
     {

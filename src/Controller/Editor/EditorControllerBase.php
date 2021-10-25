@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Supervisor;
+namespace App\Controller\Editor;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

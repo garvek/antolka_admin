@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Mapper;
+namespace App\Controller\Cartographer;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

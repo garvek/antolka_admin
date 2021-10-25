@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Crud;
 
 use App\Entity\Message;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

@@ -1,36 +1,37 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Crud;
 
-use App\Entity\Tile;
+use App\Entity\Zone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class TileCrudController extends AbstractCrudController
+class ZoneCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Tile::class;
+        return Zone::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            IntegerField::new('x'),
-            IntegerField::new('y'),
-            IntegerField::new('z'),
-            IntegerField::new('viewbox')->hideOnIndex(),
-            IntegerField::new('collidebox')->hideOnIndex(),
-            AssociationField::new('image'),
-            IntegerField::new('allowedVehicles'),
-            AssociationField::new('zone'),
+            TextField::new('name'),
+            AssociationField::new('region'),
+            BooleanField::new('crimeAllowed')->hideOnIndex(),
+            BooleanField::new('combatAllowed')->hideOnIndex(),
+            BooleanField::new('searchAllowed')->hideOnIndex(),
+            BooleanField::new('cropAllowed')->hideOnIndex(),
+            BooleanField::new('shoutAllowed')->hideOnIndex(),
+            BooleanField::new('radioAllowed')->hideOnIndex(),
         ];
     }
 	
@@ -51,11 +52,8 @@ class TileCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
             return $filters
-                    ->add('x')
-                    ->add('y')
-                    ->add('z')
-                    ->add('zone')
-                    ->add('allowedVehicles')
+                    ->add('name')
+                    ->add('region')
             ;
     }
 }

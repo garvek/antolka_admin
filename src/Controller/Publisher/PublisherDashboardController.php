@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/publi/message")
  */
-class MessageDashboardController extends MessageControllerBase
+class PublisherDashboardController extends PublisherControllerBase
 {
     /**
      * @Route("/index", name="message_index")

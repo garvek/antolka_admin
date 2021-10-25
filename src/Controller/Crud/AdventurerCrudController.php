@@ -1,29 +1,30 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Crud;
 
-use App\Entity\AdventurerAttribute;
+use App\Entity\Adventurer;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class AdventurerAttributeCrudController extends AbstractCrudController
+class AdventurerCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return AdventurerAttribute::class;
+        return Adventurer::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            IntegerField::new('attribute')->hideWhenUpdating(),
-            IntegerField::new('value'),
-            AssociationField::new('adventurer')->hideWhenUpdating(),
+            TextField::new('name'),
+            IntegerField::new('controlType'),
+            AssociationField::new('tile'),
         ];
     }
 	
@@ -37,8 +38,8 @@ class AdventurerAttributeCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-                ->add('attribute')
-                ->add('adventurer')
+                ->add('name')
+                ->add('controlType')
         ;
     }
 }
