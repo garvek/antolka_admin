@@ -14,6 +14,8 @@ User: Utilisateur
 ControlInfo: Contrôle
 Adventurer: Aventurier
 AdventurerAttribute: Attribut
+GameLog: Journal
+GameLogReader: Lecteur
 Message: Message
 MessageRecipient: Destinataire
 Vehicle: Véhicule
@@ -46,6 +48,12 @@ Allowed Vehicles: Véhicules autorisés
 Filename: Nom de fichier
 Type: Type
 Tag: Tag
+Date: Date
+Source: Source
+Target: Cible
+Params: Paramètres
+Game Log: Journal
+Reader: Lecteur
 
 # CRUD values
 Global: Global

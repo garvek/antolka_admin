@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Adventurer;
 use App\Entity\AdventurerAttribute;
 use App\Entity\ControlInfo;
+use App\Entity\GameLog;
+use App\Entity\GameLogReader;
 use App\Entity\Message;
 use App\Entity\MessageRecipient;
 use App\Entity\Region;
@@ -64,6 +66,8 @@ class CrudDashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Tile', 'fas fa-list', Tile::class);
         yield MenuItem::linkToCrud('TileImage', 'fas fa-list', TileImage::class);
         yield MenuItem::section();
+        yield MenuItem::linkToCrud('GameLog', 'fas fa-list', GameLog::class);
+        yield MenuItem::linkToCrud('GameLogReader', 'fas fa-list', GameLogReader::class);
         yield MenuItem::linkToCrud('Message', 'fas fa-list', Message::class);
         yield MenuItem::linkToCrud('MessageRecipient', 'fas fa-list', MessageRecipient::class);
         yield MenuItem::section();
