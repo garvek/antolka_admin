@@ -55,8 +55,7 @@ class MessageCrudController extends AbstractCrudController
             'Global' => Message::TYPE_GLOBAL,
             'Region' => Message::TYPE_REGION,
             'Zone' => Message::TYPE_ZONE,
-            'Area' => Message::TYPE_AREA,
-            'Direct' => Message::TYPE_DIRECT,
+            'Normal' => Message::TYPE_NORMAL,
             'Special' => Message::TYPE_SPECIAL
         ];
     }

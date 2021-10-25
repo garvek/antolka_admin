@@ -18,12 +18,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Message
 {
-    public const TYPE_GLOBAL = 0;
-    public const TYPE_REGION = 1;
-    public const TYPE_ZONE = 2;
-    public const TYPE_AREA = 3;
-    public const TYPE_DIRECT = 4;
-    public const TYPE_SPECIAL = 5;
+    public const TYPE_GLOBAL = 0;   /* global, sticky */
+    public const TYPE_REGION = 1;   /* region related, sticky */
+    public const TYPE_ZONE = 2;     /* zone related, sticky */
+    public const TYPE_NORMAL = 3;   /* user, normal position */
+    public const TYPE_SPECIAL = 4;  /* special, normal position */
 
     /**
      * @ORM\Id
